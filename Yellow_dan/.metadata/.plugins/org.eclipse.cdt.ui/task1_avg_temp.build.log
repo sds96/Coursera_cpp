@@ -1,0 +1,8 @@
+18:20:02 **** Incremental Build of configuration Debug for project task1_avg_temp ****
+Info: Configuration "Debug" uses tool-chain "MinGW GCC" that is unsupported on this system, attempting to build anyway.
+Info: Internal Builder is used for build
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\task1_avg_temp.o" "..\\src\\task1_avg_temp.cpp" 
+g++ -o task1_avg_temp.exe "src\\task1_avg_temp.o" 
+
+18:20:03 Build Finished. 0 errors, 0 warnings. (took 1s.304ms)
+

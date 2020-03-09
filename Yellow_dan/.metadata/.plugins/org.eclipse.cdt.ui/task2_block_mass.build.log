@@ -1,0 +1,8 @@
+19:39:55 **** Incremental Build of configuration Debug for project task2_block_mass ****
+Info: Configuration "Debug" uses tool-chain "MinGW GCC" that is unsupported on this system, attempting to build anyway.
+Info: Internal Builder is used for build
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\task2_block_mass.o" "..\\src\\task2_block_mass.cpp" 
+g++ -o task2_block_mass.exe "src\\task2_block_mass.o" 
+
+19:39:56 Build Finished. 0 errors, 0 warnings. (took 1s.654ms)
+

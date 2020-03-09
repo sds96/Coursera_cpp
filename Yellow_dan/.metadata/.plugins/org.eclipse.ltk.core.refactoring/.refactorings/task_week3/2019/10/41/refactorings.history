@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;task_week3/src/sum_reverse_sort.h&apos; to &apos;phone_number.h&apos;" description="Rename resource &apos;sum_reverse_sort.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/sum_reverse_sort.h" name="phone_number.h" stamp="1570644934653" updateReferences="true"/>
+</session>

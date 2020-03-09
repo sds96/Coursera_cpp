@@ -1,0 +1,14 @@
+LaunchTargetManager/configs/task1_avg_temp\ Debug=org.eclipse.launchbar.core.launchTargetType.local\:Local
+LaunchTargetManager/configs/task3_region_base.exe=org.eclipse.launchbar.core.launchTargetType.local\:Local
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/name=Local
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
+activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
+configDescList=org.eclipse.launchbar.core.descriptorType.default\:task1_avg_temp Debug,org.eclipse.launchbar.core.descriptorType.default\:task2_block_mass.exe,org.eclipse.launchbar.core.descriptorType.default\:task3_region_base.exe,org.eclipse.launchbar.core.descriptorType.default\:task_week3.exe,org.eclipse.launchbar.core.descriptorType.default\:decomposition.exe,org.eclipse.launchbar.core.descriptorType.default\:final_project.exe
+eclipse.preferences.version=1
+org.eclipse.launchbar.core.descriptorType.default\:decomposition.exe/activeLaunchMode=run
+org.eclipse.launchbar.core.descriptorType.default\:decomposition.exe/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
+org.eclipse.launchbar.core.descriptorType.default\:final_project.exe/activeLaunchMode=run
+org.eclipse.launchbar.core.descriptorType.default\:task1_avg_temp\ Debug/activeLaunchMode=run
+org.eclipse.launchbar.core.descriptorType.default\:task1_avg_temp\ Debug/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
+org.eclipse.launchbar.core.descriptorType.default\:task_week3.exe/activeLaunchMode=debug

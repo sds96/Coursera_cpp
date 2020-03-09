@@ -1,0 +1,16 @@
+ToolChainManager/order/0.id=gcc-x86-C\:/Qt/Tools/mingw730_64/bin/gcc.exe
+ToolChainManager/order/0.type=org.eclipse.cdt.build.gcc
+ToolChainManager/order/1.id=gcc-x86_64-C\:/Qt/Tools/mingw730_64/bin/gcc.exe
+ToolChainManager/order/1.type=org.eclipse.cdt.build.gcc
+ToolChainManager/order/2.id=gcc-i686-C\:/Coursera_cpp/mingw64/mingw32/bin/gcc.exe
+ToolChainManager/order/2.type=org.eclipse.cdt.build.gcc
+ToolChainManager/order/3.id=gcc-i686-C\:/Coursera_cpp/mingw64/mingw32/bin/i686-w64-mingw32-gcc.exe
+ToolChainManager/order/3.type=org.eclipse.cdt.build.gcc
+ToolChainManager/order/n=4
+build.all.configs.enabled=false
+build.proj.ref.configs.enabled=false
+eclipse.preferences.version=1
+errorparser.default.ids=org.eclipse.cdt.autotools.core.ErrorParser;org.eclipse.cdt.core.GASErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GmakeErrorParser;org.eclipse.cdt.core.VCErrorParser;org.eclipse.cdt.core.CWDLocator;org.eclipse.cdt.core.MakeErrorParser
+language.settings.providers.workspace.prefs.toggle=true
+macros/workspace=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<macros/>\r\n
+org.eclipse.cdt.core.showSourceRootsAtTopLevelOfProject=true

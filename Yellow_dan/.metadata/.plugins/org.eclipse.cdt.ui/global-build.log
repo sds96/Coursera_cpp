@@ -1,0 +1,5 @@
+12:40:23 **** Incremental Build of configuration Debug for project final_project ****
+Info: Internal Builder is used for build
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\main.o" "..\\src\\main.cpp" 
+g++ -o final_project.exe "src\\condition_parser.o" "src\\condition_parser_test.o" "src\\database.o" "src\\date.o" "src\\main.o" "src\\node.o" "src\\token.o" 
+Info: Nothing to build for final_project

@@ -1,0 +1,9 @@
+22:46:10 **** Incremental Build of configuration Debug for project task_week3 ****
+Info: Configuration "Debug" uses tool-chain "MinGW GCC" that is unsupported on this system, attempting to build anyway.
+Info: Internal Builder is used for build
+g++ -o task_week3.exe "src\\task_week3.o" 
+C:/Coursera_cpp/mingw64/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/../../../../i686-w64-mingw32/lib/../lib/libmingw32.a(lib32_libmingw32_a-crt0_c.o):crt0_c.c:(.text.startup+0x39): undefined reference to `WinMain@16'
+collect2.exe: error: ld returned 1 exit status
+
+22:46:10 Build Finished. 0 errors, 0 warnings. (took 220ms)
+

@@ -1,0 +1,23 @@
+#ifndef NODE_H_
+#define NODE_H_
+
+class Node{
+
+};
+
+class EmptyNode{
+
+};
+
+class DateComparisonNode{
+
+};
+
+class EventComparisonNode{
+
+};
+
+class LogicalOperationNode{
+
+};
+#endif /* NODE_H_ */

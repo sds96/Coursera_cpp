@@ -1,0 +1,25 @@
+#ifndef DATABASE_H_
+#define DATABASE_H_
+
+#include <iostream>
+#include <deque>
+#include <map>
+#include "date.h"
+
+class Database {
+public:
+  void Add(const Date& date, const std::string& event);
+
+  bool DeleteEvent(const Date& date, const std::string& event);
+
+  int DeleteDate(const Date& date);
+
+  std::deque<std::string> Find(const Date& date) const;
+
+  void Print() const;
+
+private:
+  std::map<Date, std::deque<std::string>> storage;
+};
+
+#endif /* DATABASE_H_ */
