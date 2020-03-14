@@ -1,0 +1,6 @@
+20:26:54 **** Incremental Build of configuration Debug for project FINAL_PROJECT_2 ****
+Info: Internal Builder is used for build
+g++ -std=c++1z -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\FINAL_PROJECT_2.o" "..\\src\\FINAL_PROJECT_2.cpp" 
+g++ -std=c++1z -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\search_server.o" "..\\src\\search_server.cpp" 
+g++ -o FINAL_PROJECT_2.exe "src\\FINAL_PROJECT_2.o" "src\\parse.o" "src\\search_server.o" 
+Info: Nothing to build for FINAL_PROJECT_2

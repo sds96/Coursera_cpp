@@ -1,0 +1,7 @@
+22:27:50 **** Incremental Build of configuration Debug for project week3_task1_pool ****
+Info: Internal Builder is used for build
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\week3_task1_pool.o" "..\\src\\week3_task1_pool.cpp" 
+g++ -o week3_task1_pool.exe "src\\week3_task1_pool.o" 
+
+22:27:51 Build Finished. 0 errors, 0 warnings. (took 878ms)
+

@@ -1,0 +1,7 @@
+12:31:53 **** Incremental Build of configuration Debug for project week4_task3_merge3 ****
+Info: Internal Builder is used for build
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\week4_task3_merge3.o" "..\\src\\week4_task3_merge3.cpp" 
+g++ -o week4_task3_merge3.exe "src\\week4_task3_merge3.o" 
+
+12:31:53 Build Finished. 0 errors, 0 warnings. (took 769ms)
+

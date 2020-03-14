@@ -1,0 +1,110 @@
+#include "search_server.h"
+#include "iterator_range.h"
+#include "profile.h"
+
+#include <algorithm>
+#include <iterator>
+#include <sstream>
+#include <iostream>
+
+vector<string_view> SplitIntoWords(string_view line) {
+	vector<string_view> result;
+	   while (true) {
+	       size_t not_space = line.find_first_not_of(' ');
+	       if (not_space == line.npos) {
+	           break;
+	       } else {
+	           line.remove_prefix(not_space);
+	       }
+	       size_t space = line.find(' ');
+	       result.push_back(line.substr(0,space));
+	       if (space == line.npos) {
+	           break;
+	       } else {
+	           line.remove_prefix(space + 1);
+	       }
+	   }
+	   return result;
+}
+
+SearchServer::SearchServer(istream& document_input) {
+  UpdateDocumentBase(document_input);
+}
+
+void SearchServer::UpdateDocumentBase(istream& document_input) { LOG_DURATION("Update");
+  InvertedIndex new_index;
+
+  for (string current_document; getline(document_input, current_document); ) {
+    new_index.Add(move(current_document));
+  }
+
+  index = move(new_index);
+}
+
+void SearchServer::AddQueriesStream(istream& query_input, ostream& search_results_output){ LOG_DURATION("AddQue");
+	vector<size_t> docid_count (index.GetNumDocs());
+  for (string current_query; getline(query_input, current_query); ) {
+    const auto words = SplitIntoWords(current_query);
+
+    for(auto& el: docid_count) el = 0;
+
+    for (auto word : words) {
+	  for (const auto& [docid, count] : index.Lookup(word)) {
+		docid_count[docid] += count;
+	  }
+	}
+
+    vector<pair<size_t, size_t>> s_r(docid_count.size());
+    for(size_t i = 0; i< s_r.size();++i){
+    	s_r[i]= {i, docid_count[i]};
+    }
+
+    auto middle =s_r.begin()+ (s_r.size() > 5 ? 5 : s_r.size());
+    partial_sort(
+      make_move_iterator(begin(s_r)), make_move_iterator(middle),
+	  make_move_iterator(end(s_r)),
+      [](pair<size_t, size_t> lhs, pair<size_t, size_t> rhs) {
+        int64_t lhs_docid = lhs.first;
+        auto lhs_hit_count = lhs.second;
+        int64_t rhs_docid = rhs.first;
+        auto rhs_hit_count = rhs.second;
+        return make_pair(lhs_hit_count, -lhs_docid) > make_pair(rhs_hit_count, -rhs_docid);
+      }
+    );
+
+    search_results_output << current_query << ':';
+    for (auto [docid, hitcount] : Head(s_r, 5)) {
+      if (hitcount == 0 ) break;
+    	search_results_output << " {"
+        << "docid: " << docid << ", "
+        << "hitcount: " << hitcount << '}';
+    }
+    search_results_output << endl;
+  }
+}
+
+void InvertedIndex::Add(string&& document) {
+  docs.push_back(move(document));
+
+  const size_t docid = docs.size() - 1;
+  //for (const auto& word : SplitIntoWords(docs.back()))
+    //index[word].push_back(docid);
+
+  map<string_view, size_t> words_count;
+
+    for (auto word : SplitIntoWords(docs.back())) {
+      ++words_count[word];
+    }
+
+    for (auto& [word, count] : words_count) {
+    	index[word].push_back({docid, count});
+    }
+}
+
+const vector<pair<size_t,size_t>>& InvertedIndex::Lookup(string_view word) const {
+  if (auto it = index.find(word); it != index.end()) {
+    return it->second;
+  } else {
+    return {};
+  }
+}

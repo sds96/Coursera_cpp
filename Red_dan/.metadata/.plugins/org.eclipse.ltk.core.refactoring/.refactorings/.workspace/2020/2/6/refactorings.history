@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;week4_task5_MatrixSum&apos; to &apos;week4_opt_task5_MatrixSum&apos;" description="Rename resource &apos;week4_task5_MatrixSum&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/week4_task5_MatrixSum" name="week4_opt_task5_MatrixSum" stamp="1581180459150" updateReferences="true"/>
+</session>

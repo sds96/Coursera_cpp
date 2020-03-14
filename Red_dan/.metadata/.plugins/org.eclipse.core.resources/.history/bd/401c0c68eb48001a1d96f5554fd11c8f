@@ -1,0 +1,133 @@
+#include "test_runner.h"
+#include <algorithm>
+#include <iostream>
+#include <iterator>
+#include <memory>
+#include <numeric>
+#include <set>
+#include <utility>
+#include <vector>
+#include <map>
+
+using namespace std;
+
+template <typename T>
+class PriorityCollection {
+public:
+	PriorityCollection(): m_id(0){}
+  using Id = unsigned long long;
+
+  // Добавить объект с нулевым приоритетом
+  // с помощью перемещения и вернуть его идентификатор
+  Id Add(T object){
+	  collection[m_id++] = move(make_pair(move(object),0));
+	  return m_id;
+  };
+
+  // Добавить все элементы диапазона [range_begin, range_end)
+  // с помощью перемещения, записав выданные им идентификаторы
+  // в диапазон [ids_begin, ...)
+  template <typename ObjInputIt, typename IdOutputIt>
+  void Add(ObjInputIt range_begin, ObjInputIt range_end,
+           IdOutputIt ids_begin){
+	  auto curr_id = m_id;
+	  while(range_begin != range_end){
+		  Add(*range_begin++);
+	  }
+	  vector<unsigned int> ret(m_id-curr_id);
+	  iota(ret.begin(), ret.end(), curr_id);
+	  move(ret.begin(), ret.end(), ids_begin);
+
+  };
+
+  // Определить, принадлежит ли идентификатор какому-либо
+  // хранящемуся в контейнере объекту
+  bool IsValid(Id id) const{
+	  try{
+		  collection.at(id);
+		  return true;
+	  }
+	  catch(std::out_of_range& ex){
+		  return false;
+	  }
+  };
+
+  // Получить объект по идентификатору
+  const T& Get(Id id) const{
+	  return collection[id];
+  };
+
+  // Увеличить приоритет объекта на 1
+  void Promote(Id id){
+	  collection[id].second++;
+  };
+
+  // Получить объект с максимальным приоритетом и его приоритет
+  pair<const T&, int> GetMax() const{
+	  unsigned int tmp_id = 0;
+	  for (const auto& el : collection){
+		  if (el.second.second >= collection[tmp_id].second)
+			  tmp_id = el.first;
+	  }
+	  return collection[tmp_id];
+  };
+
+  // Аналогично GetMax, но удаляет элемент из контейнера
+  pair<T, int> PopMax(){
+	  unsigned int tmp_id = 0;
+	  for (const auto& el : collection){
+		  if (el.second.second >= collection[tmp_id].second)
+			  tmp_id = el.first;
+	  }
+	  pair<T, int> copy = move(collection[tmp_id]);
+	  collection.erase(tmp_id);
+	  return copy;
+  };
+
+private:
+  map<Id, pair<T, int>> collection;
+  Id m_id;
+};
+
+class StringNonCopyable : public string {
+public:
+  using string::string;  // Позволяет использовать конструкторы строки
+  StringNonCopyable(const StringNonCopyable&) = delete;
+  StringNonCopyable(StringNonCopyable&&) = default;
+  StringNonCopyable& operator=(const StringNonCopyable&) = delete;
+  StringNonCopyable& operator=(StringNonCopyable&&) = default;
+};
+
+void TestNoCopy() {
+  PriorityCollection<StringNonCopyable> strings;
+  const auto white_id = strings.Add("white");
+  const auto yellow_id = strings.Add("yellow");
+  const auto red_id = strings.Add("red");
+
+  strings.Promote(yellow_id);
+  for (int i = 0; i < 2; ++i) {
+    strings.Promote(red_id);
+  }
+  strings.Promote(yellow_id);
+  {
+    const auto item = strings.PopMax();
+    ASSERT_EQUAL(item.first, "red");
+    ASSERT_EQUAL(item.second, 2);
+  }
+  {
+    const auto item = strings.PopMax();
+    ASSERT_EQUAL(item.first, "yellow");
+    ASSERT_EQUAL(item.second, 2);
+  }
+  {
+    const auto item = strings.PopMax();
+    ASSERT_EQUAL(item.first, "white");
+    ASSERT_EQUAL(item.second, 0);
+  }
+}
+
+int main() {
+  TestRunner tr;
+  RUN_TEST(tr, TestNoCopy);
+  return 0;
+}

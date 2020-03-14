@@ -1,0 +1,13 @@
+19:45:46 **** Incremental Build of configuration Debug for project week4_task5_MatrixSum ****
+Info: Internal Builder is used for build
+g++ -std=c++1z -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\week4_task5_MatrixSum.o" "..\\src\\week4_task5_MatrixSum.cpp" 
+..\src\week4_task5_MatrixSum.cpp: In instantiation of 'Paginator<Iterator>::Paginator(Iterator, Iterator, size_t) [with Iterator = __gnu_cxx::__normal_iterator<const std::vector<int>*, std::vector<std::vector<int> > >; size_t = long long unsigned int]':
+..\src\week4_task5_MatrixSum.cpp:55:9:   required from 'auto Paginate(C&, size_t) [with C = const std::vector<std::vector<int> >; size_t = long long unsigned int]'
+..\src\week4_task5_MatrixSum.cpp:61:39:   required from here
+..\src\week4_task5_MatrixSum.cpp:35:22: warning: comparison of integer expressions of different signedness: 'std::__iterator_traits<__gnu_cxx::__normal_iterator<const std::vector<int>*, std::vector<std::vector<int> > >, void>::difference_type' {aka 'long long int'} and 'size_t' {aka 'long long unsigned int'} [-Wsign-compare]
+    if(distance(it,e) > page_size){
+       ~~~~~~~~~~~~~~~^~~~~~~~~~~
+g++ -o week4_task5_MatrixSum.exe "src\\week4_task5_MatrixSum.o" 
+
+19:45:48 Build Finished. 0 errors, 1 warnings. (took 1s.783ms)
+

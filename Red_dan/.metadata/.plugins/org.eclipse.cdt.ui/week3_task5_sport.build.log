@@ -1,0 +1,11 @@
+17:02:19 **** Incremental Build of configuration Debug for project week3_task5_sport ****
+Info: Internal Builder is used for build
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\week3_task5_sport.o" "..\\src\\week3_task5_sport.cpp" 
+..\src\week3_task5_sport.cpp: In function 'int main()':
+..\src\week3_task5_sport.cpp:23:7: warning: variable 'last_pos' set but not used [-Wunused-but-set-variable]
+  auto last_pos = begin(players);
+       ^~~~~~~~
+g++ -o week3_task5_sport.exe "src\\week3_task5_sport.o" 
+
+17:02:20 Build Finished. 0 errors, 1 warnings. (took 614ms)
+

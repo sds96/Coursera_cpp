@@ -1,0 +1,21 @@
+20:25:01 **** Incremental Build of configuration Debug for project week3_task6_stackVector ****
+Info: Internal Builder is used for build
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\week3_task6_stackVector.o" "..\\src\\week3_task6_stackVector.cpp" 
+..\src\week3_task6_stackVector.cpp: In function 'int main()':
+..\src\week3_task6_stackVector.cpp:126:8: error: 'string_view' is not a member of 'std'
+   std::string_view s1, s2;
+        ^~~~~~~~~~~
+..\src\week3_task6_stackVector.cpp:126:8: note: 'std::string_view' is only available from C++17 onwards
+..\src\week3_task6_stackVector.cpp:127:3: error: 's1' was not declared in this scope
+   s1+=s2;
+   ^~
+..\src\week3_task6_stackVector.cpp:127:3: note: suggested alternative: 'y1'
+   s1+=s2;
+   ^~
+   y1
+..\src\week3_task6_stackVector.cpp:127:7: error: 's2' was not declared in this scope
+   s1+=s2;
+       ^~
+
+20:25:02 Build Failed. 3 errors, 0 warnings. (took 601ms)
+

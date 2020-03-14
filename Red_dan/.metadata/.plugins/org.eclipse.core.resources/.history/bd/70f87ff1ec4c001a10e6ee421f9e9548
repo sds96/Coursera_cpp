@@ -1,0 +1,47 @@
+#pragma once
+
+#include <mutex>
+#include <future>
+#include <istream>
+#include <ostream>
+#include <set>
+#include <list>
+#include <vector>
+#include <map>
+#include <string>
+#include <deque>
+#include <string_view>
+using namespace std;
+
+class InvertedIndex {
+public:
+  void Add(string&& document);
+  const vector<pair<size_t,size_t>>& Lookup(string_view word) const;
+
+  const string& GetDocument(size_t id) const {
+    return docs[id];
+  }
+
+  const size_t GetNumDocs() const{
+	  return docs.size();
+  }
+
+private:
+  map<string_view, vector<pair<size_t, size_t>>> index_map;
+  deque<string> docs;
+  vector<pair<size_t,size_t>> empty_lookup;
+};
+
+class SearchServer {
+public:
+  SearchServer() = default;
+  explicit SearchServer(istream& document_input);
+  void UpdateDocumentBase(istream& document_input);
+  void AddQueriesStream(istream& query_input, ostream& search_results_output);
+
+private:
+  InvertedIndex index;
+  mutex m;
+  vector<future<void>> futures;
+  bool init;
+};

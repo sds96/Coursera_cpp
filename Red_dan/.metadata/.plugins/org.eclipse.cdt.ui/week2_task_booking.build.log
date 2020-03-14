@@ -1,0 +1,7 @@
+16:26:08 **** Incremental Build of configuration Debug for project week2_task_booking ****
+Info: Internal Builder is used for build
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\week2_task_booking.o" "..\\src\\week2_task_booking.cpp" 
+g++ -o week2_task_booking.exe "src\\week2_task_booking.o" 
+
+16:26:08 Build Finished. 0 errors, 0 warnings. (took 916ms)
+

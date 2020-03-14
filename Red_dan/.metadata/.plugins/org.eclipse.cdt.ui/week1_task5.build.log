@@ -1,0 +1,9 @@
+20:14:35 **** Incremental Build of configuration Debug for project week1_task5 ****
+Info: Internal Builder is used for build
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\week1_task5.o" "..\\src\\week1_task5.cpp" 
+g++ -o week1_task5.exe "src\\week1_task5.o" 
+C:/Coursera/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/lib/../lib/libmingw32.a(lib64_libmingw32_a-crt0_c.o):crt0_c.c:(.text.startup+0x2e): undefined reference to `WinMain'
+collect2.exe: error: ld returned 1 exit status
+
+20:14:37 Build Finished. 0 errors, 0 warnings. (took 2s.231ms)
+

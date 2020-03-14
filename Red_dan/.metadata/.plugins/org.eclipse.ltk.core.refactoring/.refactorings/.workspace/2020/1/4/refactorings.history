@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;wwek3_task2_swap_sort&apos; to &apos;week3_task2_swap_sort&apos;" description="Rename resource &apos;wwek3_task2_swap_sort&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/wwek3_task2_swap_sort" name="week3_task2_swap_sort" stamp="1579522263791" updateReferences="true"/>
+</session>

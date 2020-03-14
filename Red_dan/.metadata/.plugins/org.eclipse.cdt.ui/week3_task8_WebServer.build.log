@@ -1,0 +1,7 @@
+22:06:25 **** Incremental Build of configuration Debug for project week3_task8_WebServer ****
+Info: Internal Builder is used for build
+g++ -std=c++1z -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\week3_task8_WebServer.o" "..\\src\\week3_task8_WebServer.cpp" 
+g++ -o week3_task8_WebServer.exe "src\\stats.o" "src\\week3_task8_WebServer.o" 
+
+22:06:26 Build Finished. 0 errors, 0 warnings. (took 1s.107ms)
+
