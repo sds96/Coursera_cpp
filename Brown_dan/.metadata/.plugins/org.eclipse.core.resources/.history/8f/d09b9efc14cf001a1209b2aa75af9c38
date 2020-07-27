@@ -1,0 +1,44 @@
+#include "Geo.h"
+#include "test_runner.h"
+#include "BusManager.h"
+#include "Bus_and_Stop.h"
+
+using namespace std;
+
+void Read_DataBase(BusManager& bm, istream& is = cin){
+	auto n = Json::LoadDocument(is);
+	int Q;
+	is >> Q;
+	for(int i=0; i<Q; ++i){
+		string type;
+		is >> type;
+		if(type == "Stop"){
+			bm.ReadStop(is);
+		} else if(type == "Bus"){
+			bm.ReadBus(is);
+		}
+	}
+	bm.Update();
+}
+
+void Answer_DataBase(BusManager& bm, istream& is = cin, ostream& os = cout){
+	int Q;
+	is >> Q;
+	for(int i=0; i<Q; ++i){
+		string type;
+		is >> type;
+		if(type == "Bus"){
+			os << bm.Print_Bus(is) << endl;
+		} else if(type == "Stop"){
+			os << bm.Print_Stop(is) << endl;
+		}
+	}
+}
+
+int main() {
+	freopen("C:/Coursera/projects_eclipse/Brown_dan/Final_Project_D/in.txt", "r", stdin);
+	BusManager bm;
+	Read_DataBase(bm, cin);
+	Answer_DataBase(bm, cin, cout);
+	return 0;
+}

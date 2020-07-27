@@ -1,0 +1,178 @@
+#include "Geo.h"
+#include "test_runner.h"
+#include "BusManager.h"
+#include <vector>
+#include <string_view>
+#include <unordered_map>
+#include <unordered_set>
+#include <iomanip>
+
+using namespace std;
+
+struct Response{
+    string bus_name;
+    int stops_number = 0;
+    int unique_stops_number = 0;
+    double route_length = 0.0;
+    bool exist = true;
+};
+
+std::ostream& operator<<(ostream& os, const Response& response) {
+    os << "Bus " << response.bus_name << ": ";
+    if (response.exist) {
+        os << response.stops_number << " stops on route, ";
+        os << response.unique_stops_number << " unique stops, ";
+        os << fixed << setprecision(6) << response.route_length << " route length";
+    } else {
+        os << "not found";
+    }
+    return os;
+}
+
+class BusManager{
+	unordered_map<string, Bus> buses;
+	unordered_map<string, BusStop> stops;
+public:
+	BusManager(){};
+
+	void ReadStop(istream& is){
+		BusStop stop;
+		stop.Read_Stop(is);
+		stops[stop.GetName()] = stop;
+	}
+
+	void ReadBus(istream& is){
+		Bus bus;
+		bus.Read_Route(is);
+		buses[bus.GetNumber()] = bus;
+	}
+
+	void PrintAll(ostream& os = cout) const{
+		for(const auto& el : buses){
+			os << "Bus number #" << el.first << " has stops: ";
+			el.second.PrintStops();
+			os << "\n";
+		}
+		for(const auto& el : stops){
+			os << el.second << endl;
+		}
+	};
+
+	Response Print_Bus(istream& is, ostream& os) const{
+		Response resp;
+		try{
+			is.ignore(1);
+			string numb;
+			is >> numb;
+			resp.bus_name = numb;
+			const Bus& curr_bus = buses.at(numb);
+			double lenght(0);
+			for(size_t i = 0; i < curr_bus.route.size()-1; ++i){
+				lenght += ComputeDistance(stops.at(curr_bus.route[i]).coord, stops.at(curr_bus.route[i+1]).coord);
+			}
+			lenght = curr_bus.isCircle ? lenght : lenght*2;
+			resp.route_length = lenght;
+			if(curr_bus.isCircle){
+				os << curr_bus.route.size() << " stops on route, ";
+			} else{
+				os << 2*curr_bus.route.size()-1 << " stops on route, ";
+			}
+			set<string> unique (curr_bus.route.begin(), curr_bus.route.end());
+
+			os << unique.size() << " unique stops, " << route_lenght << " route length\n";
+			return resp;
+		} catch (...){
+			resp.exist = false;
+			return resp;
+		}
+	};
+};
+
+
+void Read_DataBase(BusManager& bm, istream& is = cin){
+	int Q;
+	is >> Q;
+	for(int i=0; i<Q; ++i){
+		string type;
+		is >> type;
+		if(type == "Stop"){
+			bm.ReadStop(is);
+		} else if(type == "Bus"){
+			bm.ReadBus(is);
+		}
+	}
+}
+
+void Answer_DataBase(BusManager& bm, istream& is = cin, ostream& os = cout){
+	int Q;
+	is >> Q;
+	for(int i=0; i<Q; ++i){
+		string type;
+		is >> type;
+		if(type == "Bus"){
+			os << bm.Print_Bus(is, os);
+		}
+	}
+}
+
+void Test_ReadBusStops(){
+	istringstream ss("2\n"
+			"Stop Tolstopaltsevo: 55.611087, 37.20829\n"
+			"Stop Marushkino: 55.595884, 37.209755\n");
+	BusManager bm;
+	ostringstream os;
+	Read_DataBase(bm, ss);
+	bm.PrintAll(os);
+	string correct("Bus_Stop:");
+	correct = correct + '"' + "Marushkino" + '"' + ". Coordinates: (55.5959, 37.2098)\n"
+					  + "Bus_Stop:" + '"' +"Tolstopaltsevo" + '"' + ". Coordinates: (55.6111, 37.2083)\n";
+	ASSERT_EQUAL(os.str(), correct);
+}
+
+void Test_ReadBus(){
+	istringstream ss("4\n"
+					 "Stop Tolstopaltsevo: 55.611087, 37.20829\n"
+					 "Stop Marushkino: 55.595884, 37.209755\n"
+					 "Stop Rasskazovka: 55.632761, 37.333324\n"
+					 "Bus 750: Tolstopaltsevo - Marushkino - Rasskazovka\n"
+					 "1\n"
+					 "Bus 750\n");
+	BusManager bm;
+	ostringstream os;
+	Read_DataBase(bm, ss);
+	Answer_DataBase(bm, ss, os);
+	ASSERT_EQUAL(os.str(), "Bus 750: 5 stops on route, 3 unique stops, 20939.5 route length\n")
+}
+
+void Test_Coursera(){
+	istringstream ss("10\n"
+					 "Stop Tolstopaltsevo: 55.611087, 37.20829\n"
+					 "Stop Marushkino: 55.595884, 37.209755\n"
+					 "Bus 256: Biryulyovo Zapadnoye > Biryusinka > Universam > Biryulyovo Tovarnaya > Biryulyovo Passazhirskaya > Biryulyovo Zapadnoye\n"
+					 "Bus 750: Tolstopaltsevo - Marushkino - Rasskazovka\n"
+					 "Stop Rasskazovka: 55.632761, 37.333324\n"
+					"Stop Biryulyovo Zapadnoye: 55.574371, 37.6517\n"
+					"Stop Biryusinka: 55.581065, 37.64839\n"
+					"Stop Universam: 55.587655, 37.645687\n"
+					"Stop Biryulyovo Tovarnaya: 55.592028, 37.653656\n"
+					"Stop Biryulyovo Passazhirskaya: 55.580999, 37.659164\n"
+					"3\n"
+					"Bus 256\n"
+					"Bus 750\n"
+					"Bus 1\n");
+	BusManager bm;
+	ostringstream os;
+	Read_DataBase(bm, ss);
+	Answer_DataBase(bm, ss, os);
+	string correct("Bus 256: 6 stops on route, 5 unique stops, 4371.02 route length\n"
+			"Bus 750: 5 stops on route, 3 unique stops, 20939.5 route length\n");
+	ASSERT_EQUAL(os.str(), correct);
+}
+
+int main() {
+	TestRunner tr;
+	RUN_TEST(tr, Test_ReadBusStops);
+	RUN_TEST(tr, Test_ReadBus);
+	RUN_TEST(tr, Test_Coursera);
+	return 0;
+}

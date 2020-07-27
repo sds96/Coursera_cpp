@@ -1,0 +1,8 @@
+14:06:41 **** Incremental Build of configuration Debug for project Final_Project_D ****
+Info: Internal Builder is used for build
+g++ -std=c++1z -O0 -g3 -Wall -c -fmessage-length=0 -o main.o "..\\main.cpp" 
+g++ -std=c++1z -O0 -g3 -Wall -c -fmessage-length=0 -o BusManager.o "..\\BusManager.cpp" 
+g++ -o Final_Project_D.exe BusManager.o Bus_and_Stop.o Geo.o json.o main.o 
+
+14:06:44 Build Finished. 0 errors, 0 warnings. (took 3s.142ms)
+

@@ -1,0 +1,45 @@
+#ifndef BUSMANAGER_H_
+#define BUSMANAGER_H_
+
+#include "Geo.h"
+#include <string>
+#include <set>
+#include <vector>
+#include <unordered_map>
+
+class BusStop{
+public:
+	Point coord;
+	std::string name;
+public:
+	BusStop();
+
+	std::string GetName() const;
+
+	void Read_Stop(std::istream& is);
+
+	friend std::ostream& operator<<(std::ostream& os, const BusStop& stop);
+};
+
+
+class Bus{
+public:
+	int bus_number;
+	std::set<std::string> stops;
+	std::vector<std::string> route;
+	bool isCircle;
+public:
+	Bus() : bus_number(0), isCircle(false)
+	{
+	};
+
+	int GetNumber() const { return bus_number; }
+
+	void PrintStops() const;
+
+	void Read_Route(std::string_view& sv, const std::unordered_map<std::string, BusStop>& stops_map);
+
+	void Read_Bus(std::istream& is,const std::unordered_map<std::string, BusStop>& stops){;
+
+};
+#endif /* BUSMANAGER_H_ */

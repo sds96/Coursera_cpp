@@ -1,0 +1,46 @@
+#ifndef BUS_AND_STOP_H_
+#define BUS_AND_STOP_H_
+
+#include "Geo.h"
+#include "json.h"
+#include <string>
+#include <vector>
+#include <set>
+#include <unordered_map>
+
+class BusStop{
+public:
+	Point coord;
+	std::string name;
+	std::set<std::string> buses;
+	std::unordered_map<std::string, double> real_distance;
+public:
+	BusStop(){};
+
+	std::string GetName() const;
+
+	void Read_Stop(const Json::Node& node);
+
+	friend std::ostream& operator<<(std::ostream& os, const BusStop& stop);
+};
+
+
+class Bus{
+public:
+	std::string bus_number;
+	std::vector<std::string> route;
+	bool isCircle;
+public:
+	Bus() : bus_number(""), isCircle(false)
+	{
+	};
+
+	std::string GetNumber() const { return bus_number; }
+
+	void PrintStops() const;
+
+	void Read_Route(const Json::Node& node);
+
+};
+
+#endif /* BUS_AND_STOP_H_ */

@@ -1,0 +1,7 @@
+19:22:51 **** Incremental Build of configuration Debug for project week3_opt_task3_Zoo ****
+Info: Internal Builder is used for build
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -o zoo.o "..\\zoo.cpp" 
+g++ -o week3_opt_task3_Zoo.exe zoo.o 
+
+19:22:52 Build Finished. 0 errors, 0 warnings. (took 972ms)
+

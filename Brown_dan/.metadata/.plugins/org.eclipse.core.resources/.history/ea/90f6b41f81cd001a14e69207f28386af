@@ -1,0 +1,64 @@
+#include "BusManager.h"
+
+using namespace std;
+
+//================== BusStop ===============
+
+std::string BusStop::GetName() const{
+		return name;
+	}
+
+void BusStop::Read_Stop(istream& is) {
+		string full;
+		getline(is, full);
+		string_view sv (full);
+		auto pos = sv.find(":");
+		name = string(sv.begin(), pos);
+
+	}
+
+std::ostream& operator<<(std::ostream& os, const BusStop& stop){
+	os << "Bus_Stop:" << '"' << stop.name <<'"' << ". Coordinates: " << stop.coord;
+	return os;
+};
+
+//================== Bus ===================
+
+void Bus::PrintStops() const {
+		for(const auto& stop: stops){
+			cout << stop << " ";
+		}
+	}
+
+void Bus::Read_Route(string_view& sv){
+		string delim = isCircle ? " > " : " - ";
+		while (!sv.empty()){
+			auto pos = sv.find_first_of(delim);
+			if (pos == sv.npos){
+				string stop_name(sv.begin(), sv.end());
+				stops.insert(stop_name);
+				route.push_back(stop_name);
+				break;
+			}
+			string stop_name(sv.begin(), pos);
+			stops.insert(stop_name); //stops_map.at(stop_name)
+			sv.remove_prefix(pos+3);
+			route.push_back(stop_name);
+		}
+	};
+
+void Bus::Read_Bus(istream& is){
+		is >> bus_number;
+		is.ignore(2);
+		string input_line;
+		getline(is, input_line);
+		if (input_line.find('-') != std::string::npos) {
+			route.stops = split(input_line, " - ");
+			for (int i = route.stops.size() - 2; i >= 0; --i) {
+				route.stops.push_back(route.stops[i]);
+			}
+		} else {
+			route.stops = split(input_line, " > ");
+		}
+
+	};

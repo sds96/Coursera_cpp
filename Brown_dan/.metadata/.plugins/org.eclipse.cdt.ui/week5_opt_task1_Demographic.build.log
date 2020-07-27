@@ -1,0 +1,164 @@
+19:06:20 **** Incremental Build of configuration Debug for project week5_opt_task1_Demographic ****
+Info: Internal Builder is used for build
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -o Demographic.o "..\\Demographic.cpp" 
+..\Demographic.cpp:35:24: error: 'Person' was not declared in this scope
+ void PrintStats(vector<Person> persons){
+                        ^~~~~~
+..\Demographic.cpp:35:24: note: suggested alternative: 'perror'
+ void PrintStats(vector<Person> persons){
+                        ^~~~~~
+                        perror
+..\Demographic.cpp:35:30: error: template argument 1 is invalid
+ void PrintStats(vector<Person> persons){
+                              ^
+..\Demographic.cpp:35:30: error: template argument 2 is invalid
+..\Demographic.cpp: In function 'void PrintStats(int)':
+..\Demographic.cpp:43:54: error: request for member 'begin' in 'persons', which is of non-class type 'int'
+  cout << "Median age = " << ComputeMedianAge(persons.begin(),
+                                                      ^~~~~
+..\Demographic.cpp:44:22: error: request for member 'begin' in 'persons', which is of non-class type 'int'
+    partition(persons.begin(), persons.end(),[](Person p){ return true;})) << endl;
+                      ^~~~~
+..\Demographic.cpp:44:39: error: request for member 'end' in 'persons', which is of non-class type 'int'
+    partition(persons.begin(), persons.end(),[](Person p){ return true;})) << endl;
+                                       ^~~
+..\Demographic.cpp:44:48: error: 'Person' has not been declared
+    partition(persons.begin(), persons.end(),[](Person p){ return true;})) << endl;
+                                                ^~~~~~
+..\Demographic.cpp:43:29: error: 'ComputeMedianAge' was not declared in this scope
+  cout << "Median age = " << ComputeMedianAge(persons.begin(),
+                             ^~~~~~~~~~~~~~~~
+..\Demographic.cpp:45:66: error: request for member 'begin' in 'persons', which is of non-class type 'int'
+  cout << "Median age for females = " << ComputeMedianAge(persons.begin(),
+                                                                  ^~~~~
+..\Demographic.cpp:46:22: error: request for member 'begin' in 'persons', which is of non-class type 'int'
+    partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::FEMALE;})) << endl;
+                      ^~~~~
+..\Demographic.cpp:46:39: error: request for member 'end' in 'persons', which is of non-class type 'int'
+    partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::FEMALE;})) << endl;
+                                       ^~~
+..\Demographic.cpp:46:48: error: 'Person' has not been declared
+    partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::FEMALE;})) << endl;
+                                                ^~~~~~
+..\Demographic.cpp: In lambda function:
+..\Demographic.cpp:46:68: error: request for member 'gender' in 'p', which is of non-class type 'int'
+    partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::FEMALE;})) << endl;
+                                                                    ^~~~~~
+..\Demographic.cpp:46:78: error: 'Gender' has not been declared
+    partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::FEMALE;})) << endl;
+                                                                              ^~~~~~
+..\Demographic.cpp: In function 'void PrintStats(int)':
+..\Demographic.cpp:47:64: error: request for member 'begin' in 'persons', which is of non-class type 'int'
+  cout << "Median age for males = " << ComputeMedianAge(persons.begin(),
+                                                                ^~~~~
+..\Demographic.cpp:48:22: error: request for member 'begin' in 'persons', which is of non-class type 'int'
+    partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::MALE;})) << endl;
+                      ^~~~~
+..\Demographic.cpp:48:39: error: request for member 'end' in 'persons', which is of non-class type 'int'
+    partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::MALE;})) << endl;
+                                       ^~~
+..\Demographic.cpp:48:48: error: 'Person' has not been declared
+    partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::MALE;})) << endl;
+                                                ^~~~~~
+..\Demographic.cpp: In lambda function:
+..\Demographic.cpp:48:68: error: request for member 'gender' in 'p', which is of non-class type 'int'
+    partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::MALE;})) << endl;
+                                                                    ^~~~~~
+..\Demographic.cpp:48:78: error: 'Gender' has not been declared
+    partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::MALE;})) << endl;
+                                                                              ^~~~~~
+..\Demographic.cpp: In function 'void PrintStats(int)':
+..\Demographic.cpp:49:75: error: request for member 'begin' in 'persons', which is of non-class type 'int'
+  cout << "Median age for employed females = " << ComputeMedianAge(persons.begin(),
+                                                                           ^~~~~
+..\Demographic.cpp:50:23: error: request for member 'begin' in 'persons', which is of non-class type 'int'
+     partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::FEMALE && p.is_employed;})) << endl;
+                       ^~~~~
+..\Demographic.cpp:50:40: error: request for member 'end' in 'persons', which is of non-class type 'int'
+     partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::FEMALE && p.is_employed;})) << endl;
+                                        ^~~
+..\Demographic.cpp:50:49: error: 'Person' has not been declared
+     partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::FEMALE && p.is_employed;})) << endl;
+                                                 ^~~~~~
+..\Demographic.cpp: In lambda function:
+..\Demographic.cpp:50:69: error: request for member 'gender' in 'p', which is of non-class type 'int'
+     partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::FEMALE && p.is_employed;})) << endl;
+                                                                     ^~~~~~
+..\Demographic.cpp:50:79: error: 'Gender' has not been declared
+     partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::FEMALE && p.is_employed;})) << endl;
+                                                                               ^~~~~~
+..\Demographic.cpp:50:99: error: request for member 'is_employed' in 'p', which is of non-class type 'int'
+     partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::FEMALE && p.is_employed;})) << endl;
+                                                                                                   ^~~~~~~~~~~
+..\Demographic.cpp: In function 'void PrintStats(int)':
+..\Demographic.cpp:51:77: error: request for member 'begin' in 'persons', which is of non-class type 'int'
+  cout << "Median age for unemployed females = " << ComputeMedianAge(persons.begin(),
+                                                                             ^~~~~
+..\Demographic.cpp:52:23: error: request for member 'begin' in 'persons', which is of non-class type 'int'
+     partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::FEMALE && !p.is_employed;;})) << endl;
+                       ^~~~~
+..\Demographic.cpp:52:40: error: request for member 'end' in 'persons', which is of non-class type 'int'
+     partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::FEMALE && !p.is_employed;;})) << endl;
+                                        ^~~
+..\Demographic.cpp:52:49: error: 'Person' has not been declared
+     partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::FEMALE && !p.is_employed;;})) << endl;
+                                                 ^~~~~~
+..\Demographic.cpp: In lambda function:
+..\Demographic.cpp:52:69: error: request for member 'gender' in 'p', which is of non-class type 'int'
+     partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::FEMALE && !p.is_employed;;})) << endl;
+                                                                     ^~~~~~
+..\Demographic.cpp:52:79: error: 'Gender' has not been declared
+     partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::FEMALE && !p.is_employed;;})) << endl;
+                                                                               ^~~~~~
+..\Demographic.cpp:52:100: error: request for member 'is_employed' in 'p', which is of non-class type 'int'
+     partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::FEMALE && !p.is_employed;;})) << endl;
+                                                                                                    ^~~~~~~~~~~
+..\Demographic.cpp: In function 'void PrintStats(int)':
+..\Demographic.cpp:53:73: error: request for member 'begin' in 'persons', which is of non-class type 'int'
+  cout << "Median age for employed males = " << ComputeMedianAge(persons.begin(),
+                                                                         ^~~~~
+..\Demographic.cpp:54:23: error: request for member 'begin' in 'persons', which is of non-class type 'int'
+     partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::MALE && p.is_employed;})) << endl;
+                       ^~~~~
+..\Demographic.cpp:54:40: error: request for member 'end' in 'persons', which is of non-class type 'int'
+     partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::MALE && p.is_employed;})) << endl;
+                                        ^~~
+..\Demographic.cpp:54:49: error: 'Person' has not been declared
+     partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::MALE && p.is_employed;})) << endl;
+                                                 ^~~~~~
+..\Demographic.cpp: In lambda function:
+..\Demographic.cpp:54:69: error: request for member 'gender' in 'p', which is of non-class type 'int'
+     partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::MALE && p.is_employed;})) << endl;
+                                                                     ^~~~~~
+..\Demographic.cpp:54:79: error: 'Gender' has not been declared
+     partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::MALE && p.is_employed;})) << endl;
+                                                                               ^~~~~~
+..\Demographic.cpp:54:97: error: request for member 'is_employed' in 'p', which is of non-class type 'int'
+     partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::MALE && p.is_employed;})) << endl;
+                                                                                                 ^~~~~~~~~~~
+..\Demographic.cpp: In function 'void PrintStats(int)':
+..\Demographic.cpp:55:75: error: request for member 'begin' in 'persons', which is of non-class type 'int'
+  cout << "Median age for unemployed males = " << ComputeMedianAge(persons.begin(),
+                                                                           ^~~~~
+..\Demographic.cpp:56:24: error: request for member 'begin' in 'persons', which is of non-class type 'int'
+      partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::MALE && !p.is_employed;;})) << endl;
+                        ^~~~~
+..\Demographic.cpp:56:41: error: request for member 'end' in 'persons', which is of non-class type 'int'
+      partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::MALE && !p.is_employed;;})) << endl;
+                                         ^~~
+..\Demographic.cpp:56:50: error: 'Person' has not been declared
+      partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::MALE && !p.is_employed;;})) << endl;
+                                                  ^~~~~~
+..\Demographic.cpp: In lambda function:
+..\Demographic.cpp:56:70: error: request for member 'gender' in 'p', which is of non-class type 'int'
+      partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::MALE && !p.is_employed;;})) << endl;
+                                                                      ^~~~~~
+..\Demographic.cpp:56:80: error: 'Gender' has not been declared
+      partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::MALE && !p.is_employed;;})) << endl;
+                                                                                ^~~~~~
+..\Demographic.cpp:56:99: error: request for member 'is_employed' in 'p', which is of non-class type 'int'
+      partition(persons.begin(), persons.end(),[](Person p){ return p.gender == Gender::MALE && !p.is_employed;;})) << endl;
+                                                                                                   ^~~~~~~~~~~
+
+19:06:21 Build Failed. 48 errors, 0 warnings. (took 436ms)
+

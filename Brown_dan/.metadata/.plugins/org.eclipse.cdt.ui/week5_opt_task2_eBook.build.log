@@ -1,0 +1,7 @@
+19:27:08 **** Incremental Build of configuration Debug for project week5_opt_task2_eBook ****
+Info: Internal Builder is used for build
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -o eBook.o "..\\eBook.cpp" 
+g++ -o week5_opt_task2_eBook.exe eBook.o 
+
+19:27:09 Build Finished. 0 errors, 0 warnings. (took 674ms)
+

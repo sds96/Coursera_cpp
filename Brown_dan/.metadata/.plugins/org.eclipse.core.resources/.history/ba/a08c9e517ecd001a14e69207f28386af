@@ -1,0 +1,17 @@
+#include "BusManager.h"
+
+using namespace std;
+
+void BusStop::Read_Stop(istream& is) {
+		string full;
+		getline(is, full);
+		string_view sv (full);
+		auto pos = sv.find(":");
+		name = string(sv.begin(), pos);
+
+	}
+
+std::ostream& operator<<(std::ostream& os, const BusStop& stop){
+	os << "Bus_Stop:" << '"' << stop.name <<'"' << ". Coordinates: " << stop.coord;
+	return os;
+};

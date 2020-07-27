@@ -1,0 +1,7 @@
+15:50:03 **** Incremental Build of configuration Debug for project week2_task4_ServerComm ****
+Info: Internal Builder is used for build
+g++ -std=c++1z -O0 -g3 -Wall -c -fmessage-length=0 -o comment_server.o "..\\comment_server.cpp" 
+g++ -o week2_task4_ServerComm.exe comment_server.o 
+
+15:50:04 Build Finished. 0 errors, 0 warnings. (took 1s.638ms)
+

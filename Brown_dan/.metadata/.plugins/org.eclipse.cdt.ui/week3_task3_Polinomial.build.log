@@ -1,0 +1,13 @@
+22:54:05 **** Incremental Build of configuration Debug for project week3_task3_Polinomial ****
+Info: Internal Builder is used for build
+g++ -std=c++1z -O0 -g3 -Wall -c -fmessage-length=0 -o Polinom.o "..\\Polinom.cpp" 
+In file included from ..\Polinom.cpp:1:
+..\test_runner.h: In instantiation of 'void AssertEqual(const T&, const U&, const string&) [with T = int; U = long long unsigned int; std::__cxx11::string = std::__cxx11::basic_string<char>]':
+..\Polinom.cpp:183:5:   required from here
+..\test_runner.h:72:11: warning: comparison of integer expressions of different signedness: 'const int' and 'const long long unsigned int' [-Wsign-compare]
+   if (!(t == u)) {
+        ~~~^~~~~
+g++ -o week3_task3_Polinomial.exe Polinom.o 
+
+22:54:06 Build Finished. 0 errors, 1 warnings. (took 1s.283ms)
+

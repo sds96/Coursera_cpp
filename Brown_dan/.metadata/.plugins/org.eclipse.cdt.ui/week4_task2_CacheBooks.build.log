@@ -1,0 +1,7 @@
+18:30:28 **** Incremental Build of configuration Debug for project week4_task2_CacheBooks ****
+Info: Internal Builder is used for build
+g++ -std=c++1z -O0 -g3 -Wall -c -fmessage-length=0 -o Solution.o "..\\Solution.cpp" 
+g++ -o week4_task2_CacheBooks.exe Solution.o main.o 
+
+18:30:30 Build Finished. 0 errors, 0 warnings. (took 1s.732ms)
+

@@ -1,0 +1,36 @@
+#ifndef BUSMANAGER_H_
+#define BUSMANAGER_H_
+
+#include "Bus_and_Stop.h"
+#include <string>
+#include <set>
+#include <unordered_map>
+#include <iomanip>
+
+struct Bus_Response{
+    std::string bus_name="";
+    int stops_number = 0;
+    int unique_stops_number = 0;
+    double route_length = 0.0;
+    bool exist = true;
+};
+
+std::ostream& operator<<(std::ostream& os, const Bus_Response& response);
+
+
+class BusManager{
+	std::unordered_map<std::string, Bus> buses;
+	std::unordered_map<std::string, BusStop> stops;
+public:
+	BusManager(){};
+
+	void ReadStop(std::istream& is);
+
+	void ReadBus(std::istream& is);
+
+	void PrintAll(std::ostream& os = std::cout) const;
+
+	Bus_Response Print_Bus(std::istream& is, std::ostream& os) const;
+};
+
+#endif /* BUSMANAGER_H_ */

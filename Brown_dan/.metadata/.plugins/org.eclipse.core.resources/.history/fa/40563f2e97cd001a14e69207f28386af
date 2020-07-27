@@ -1,0 +1,15 @@
+#include "BusManager.h"
+
+using namespace std;
+
+ostream& operator<<(ostream& os, const Response& response) {
+    os << "Bus " << response.bus_name << ": ";
+    if (response.exist) {
+        os << response.stops_number << " stops on route, ";
+        os << response.unique_stops_number << " unique stops, ";
+        os << fixed << setprecision(6) << response.route_length << " route length";
+    } else {
+        os << "not found";
+    }
+    return os;
+}

@@ -1,0 +1,89 @@
+#ifndef BUSMANAGER_H_
+#define BUSMANAGER_H_
+
+#include "Bus_and_Stop.h"
+#include "json.h"
+#include "graph.h"
+#include "router.h"
+#include <string>
+#include <set>
+#include <unordered_map>
+#include <iomanip>
+
+struct Bus_Response{
+    std::string bus_name="";
+    int stops_number = 0;
+    int unique_stops_number = 0;
+    double route_length = 0.0;
+    double curv = 0.0;
+    bool exist = true;
+    int id = 0;
+};
+
+struct Stop_Response{
+	std::string name="";
+	std::set<std::string> buses;
+    bool exist = true;
+    int id = 0;
+};
+
+enum ItemType{
+	BUS,
+	WAIT
+};
+
+struct Item{
+	ItemType type;
+	double time = 0.0;
+
+	std::string stop_name = "";
+
+	std::string bus = "";
+	int span_count = 0;
+};
+
+struct Route_Response{
+	int id = 0;
+	bool exist = true;
+	double total_time = 0.0;
+	std::vector<Item> items;
+
+};
+
+std::ostream& operator<<(std::ostream& os, const Bus_Response& response);
+std::ostream& operator<<(std::ostream& os, const Stop_Response& response);
+std::ostream& operator<<(std::ostream& os, const Route_Response& response);
+
+
+class BusManager{
+	std::unordered_map<std::string, Bus> buses;
+	std::unordered_map<std::string, BusStop> stops;
+
+	std::unordered_map<std::string, size_t> stops_to_indexes;
+	std::unordered_map<size_t, std::string> indexes_to_stops;
+
+	int bus_wait_time;
+	double bus_velocity;
+	Graph::DirectedWeightedGraph<double>* graph;
+	Graph::Router<double>* router;
+
+public:
+	BusManager(): bus_wait_time(0), bus_velocity(0), graph(nullptr), router(nullptr)
+	{};
+
+	void ReadStop(const Json::Node& node);
+
+	void ReadBus(const Json::Node& node);
+
+	void ReadSettings(const Json::Node& settings);
+
+	Bus_Response Print_Bus(const Json::Node& node) const;
+
+	Stop_Response Print_Stop(const Json::Node& node) const;
+
+	Route_Response Print_Route(const Json::Node& node) const;
+
+	void Update();
+};
+
+#endif /* BUSMANAGER_H_ */

@@ -1,0 +1,82 @@
+#include "Geo.h"
+#include <string_view>
+
+double Point::GetLatitude() const{
+	return this->latitude;
+}
+
+double Point::GetLongitude() const{
+	return this->longitude;
+}
+
+double ComputeDistance (Point lhs, Point rhs){
+	double pi_per_deg = PI / 180;
+
+	const double lat1 = lhs.GetLatitude() * pi_per_deg;
+	const double lat2 = rhs.GetLatitude() * pi_per_deg;
+
+	const double long1 = lhs.GetLongitude() * pi_per_deg;
+	const double long2 = rhs.GetLongitude() * pi_per_deg;
+
+	return std::acos(std::sin(lat1) * std::sin(lat2) +
+					 std::cos(lat1) * std::cos(lat2) *
+					 std::cos(std::abs(long1 - long2))) * EARTH_RADIUS;
+};
+
+void Point::SetLatitude(double val){
+	this->latitude = val;
+};
+
+
+void Point::SetLongitude(double val){
+	this->longitude = val;
+};
+
+std::istream& operator>>(std::istream& is, Point& point){
+	is >> point.latitude;
+	is.ignore(1);
+	is >> point.longitude;
+	return is;
+};
+
+std::ostream& operator<<(std::ostream& os, const Point& point){
+	os << "(" << point.latitude << ", " << point.longitude << ")";
+	return os;
+};
+
+
+std::vector<std::string> split(const std::string& s, const char separator = ' ') {
+    std::string_view str = s;
+    std::vector<std::string> result;
+
+    while (true) {
+        size_t space = str.find(separator);
+        result.emplace_back(std::string(str.substr(0, space)));
+
+        if (space == std::string_view::npos) {
+            break;
+        } else {
+            str.remove_prefix(space + 1);
+        }
+    }
+
+    return result;
+}
+
+std::vector<std::string> split(const std::string& s, const std::string& separator = " ") {
+    std::string_view str = s;
+    std::vector<std::string> result;
+
+    while (true) {
+        size_t space = str.find(separator);
+        result.emplace_back(std::string(str.substr(0, space)));
+
+        if (space == std::string_view::npos) {
+            break;
+        } else {
+            str.remove_prefix(space + separator.size());
+        }
+    }
+
+    return result;
+}

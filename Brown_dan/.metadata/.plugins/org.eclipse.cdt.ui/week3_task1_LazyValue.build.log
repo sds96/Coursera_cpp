@@ -1,0 +1,7 @@
+23:05:07 **** Incremental Build of configuration Debug for project week3_task1_LazyValue ****
+Info: Internal Builder is used for build
+g++ -std=c++1z -O0 -g3 -Wall -c -fmessage-length=0 -o Lazy.o "..\\Lazy.cpp" 
+g++ -o week3_task1_LazyValue.exe Lazy.o 
+
+23:05:08 Build Finished. 0 errors, 0 warnings. (took 969ms)
+

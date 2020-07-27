@@ -1,0 +1,6 @@
+14:42:27 **** Incremental Build of configuration Debug for project week5_task_Budget_prof_mobile ****
+Info: Internal Builder is used for build
+g++ -o week5_task_Budget_prof_mobile.exe main.o 
+
+14:42:27 Build Finished. 0 errors, 0 warnings. (took 410ms)
+

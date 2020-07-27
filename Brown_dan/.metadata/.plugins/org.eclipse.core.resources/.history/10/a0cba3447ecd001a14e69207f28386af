@@ -1,0 +1,29 @@
+#ifndef BUSMANAGER_H_
+#define BUSMANAGER_H_
+
+#include "Geo.h"
+#include <string>
+
+class BusStop{
+public:
+	Point coord;
+	std::string name;
+public:
+	BusStop()
+	{
+	};
+
+	std::string GetName() const{
+		return name;
+	}
+
+	void Read_Stop(istream& is);
+
+	friend std::ostream& operator<<(std::ostream& os, const BusStop& stop);
+};
+
+
+
+
+
+#endif /* BUSMANAGER_H_ */

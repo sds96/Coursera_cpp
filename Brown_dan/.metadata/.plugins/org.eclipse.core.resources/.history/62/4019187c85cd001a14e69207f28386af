@@ -1,0 +1,45 @@
+#include "BusManager.h"
+
+using namespace std;
+
+//================== BusStop ===============
+
+std::string BusStop::GetName() const{
+		return name;
+	}
+
+void BusStop::Read_Stop(istream& is) {
+		string full;
+		is.ignore(1);
+		getline(is, name, ':');
+		is >> coord;
+	}
+
+std::ostream& operator<<(std::ostream& os, const BusStop& stop){
+	os << "Bus_Stop:" << '"' << stop.name <<'"' << ". Coordinates: " << stop.coord;
+	return os;
+};
+
+//================== Bus ===================
+
+void Bus::PrintStops() const {
+	for(const auto& stop: route){
+		cout << stop << " ";
+	}
+}
+
+void Bus::Read_Route(istream& is){
+	cout << "here"<<endl;
+	getline(is, bus_number, ':');
+	is.ignore(1);
+
+
+	string input_line;
+	getline(is, input_line);
+	if (input_line.find('-') != std::string::npos) {
+		route = split(input_line, " - ");
+	} else {
+		isCircle = true;
+		route = split(input_line, " > ");
+	}
+};

@@ -1,0 +1,70 @@
+#ifndef BUSMANAGER_H_
+#define BUSMANAGER_H_
+
+#include "Geo.h"
+#include <string>
+#include <set>
+#include <vector>
+
+class BusStop{
+public:
+	Point coord;
+	std::string name;
+public:
+	BusStop();
+
+	std::string GetName() const;
+
+	void Read_Stop(std::istream& is);
+
+	friend std::ostream& operator<<(std::ostream& os, const BusStop& stop);
+};
+
+
+class Bus{
+public:
+	int bus_number;
+	std::set<std::string> stops;
+	std::vector<std::string> route;
+	bool isCircle;
+public:
+	Bus() : bus_number(0), isCircle(false)
+	{
+	};
+
+	int GetNumber() const { return bus_number; }
+
+	void PrintStops() const;
+
+	void Read_Route(string_view& sv, const unordered_map<string, BusStop>& stops_map){
+		string delim = isCircle ? " > " : " - ";
+		while (!sv.empty()){
+			auto pos = sv.find_first_of(delim);
+			if (pos == sv.npos){
+				string stop_name(sv.begin(), sv.end());
+				stops.insert(stop_name);
+				route.push_back(stop_name);
+				break;
+			}
+			string stop_name(sv.begin(), pos);
+			stops.insert(stop_name); //stops_map.at(stop_name)
+			sv.remove_prefix(pos+3);
+			route.push_back(stop_name);
+		}
+	};
+
+	void Read_Bus(istream& is,const unordered_map<string, BusStop>& stops){
+		is >> bus_number;
+		is.ignore(2);
+		string stops_str;
+		getline(is, stops_str);
+		string_view sv (stops_str);
+		auto pos = sv.find_first_of(" > ");
+		if (pos != sv.npos){
+			isCircle = true;
+		}
+		Read_Route(sv, stops);
+	};
+
+};
+#endif /* BUSMANAGER_H_ */

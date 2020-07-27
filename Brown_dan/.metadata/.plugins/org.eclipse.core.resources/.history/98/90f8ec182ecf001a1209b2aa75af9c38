@@ -1,0 +1,136 @@
+#include "BusManager.h"
+
+
+using namespace std;
+
+ostream& operator<<(ostream& os, const Bus_Response& response) {
+    os << "{\n";
+	os << '"' << "request_id" << '"' << ": " << response.id << ",\n";
+	if (response.exist) {
+        os << fixed << setprecision(6) << '"' << "route_lenght" << '"' << ": " << response.route_length << ",\n";
+        os << '"' << "curvature" << '"' << ": " << response.curv << ",\n";
+        os << '"' << "stop_count" << '"' << ": " << response.stops_number << ",\n";
+        os << '"' << "unique_stop_count" << '"' << ": " << response.unique_stops_number << "\n";
+    } else {
+    	os << '"' << "error_message" << '"' << ": " << '"' << "not found" << '"' << "\n";
+    }
+	os << "}";
+    return os;
+}
+
+ostream& operator<<(ostream& os, const Stop_Response& response) {
+    os << "{\n";
+	os << '"' << "request_id" << '"' << ": " << response.id << ",\n";
+    if (response.exist) {
+    	os << '"' << "buses" << '"' << ": ";
+    	if(!response.buses.size())
+    		os << "[]\n";
+    	else{
+    		os << "[\n";
+			for (const string& bus: response.buses){
+				os << '"' << bus << '"' << ",\n";
+			}
+			os << "]\n";
+    	}
+    } else {
+    	os << '"' << "error_message" << '"' << ": " << '"' << "not found" << '"' << "\n";
+    }
+	os << "}";
+    return os;
+}
+
+void BusManager::ReadStop(const Json::Node& node){
+	BusStop stop;
+	stop.Read_Stop(node);
+	stops[stop.GetName()] = stop;
+}
+
+void BusManager::ReadBus(const Json::Node& node){
+	Bus bus;
+	bus.Read_Route(node);
+	buses[bus.GetNumber()] = bus;
+}
+
+void BusManager::PrintAll(std::ostream& os) const{
+	for(const auto& el : buses){
+		os << "Bus number #" << el.first << " has stops: ";
+		el.second.PrintStops();
+		os << "\n";
+	}
+	for(const auto& el : stops){
+		os << el.second;
+		if(el.second.real_distance.size())
+			for(auto& d: el.second.real_distance){
+				os << ". Distance to " << d.first << " = " << d.second;
+			}
+		os << endl;
+	}
+};
+
+Bus_Response BusManager::Print_Bus(const Json::Node& node) const{
+	Bus_Response resp;
+	try{
+		const auto& map = node.AsMap();
+		string name = map.at("name").AsString();
+		resp.bus_name = name;
+		resp.id = map.at("id").AsInt();
+
+		const Bus& curr_bus = buses.at(name);
+		double calc_lenght(0);
+		double true_lenght_f(0), true_lenght_b(0);
+		for(size_t i = 0; i < curr_bus.route.size()-1; ++i){
+			auto it = stops.at(curr_bus.route[i]).real_distance.find(curr_bus.route[i+1]);
+			true_lenght_f += it->second;
+			it = stops.at(curr_bus.route[i+1]).real_distance.find(curr_bus.route[i]);
+			true_lenght_b += it->second;
+			calc_lenght += ComputeDistance(stops.at(curr_bus.route[i]).coord, stops.at(curr_bus.route[i+1]).coord);
+		}
+		calc_lenght = curr_bus.isCircle ? calc_lenght : calc_lenght*2;
+
+		resp.route_length = curr_bus.isCircle ? true_lenght_f : true_lenght_f + true_lenght_b;
+		resp.curv = curr_bus.isCircle ? true_lenght_f/calc_lenght : (true_lenght_f + true_lenght_b)/calc_lenght;
+		resp.stops_number = curr_bus.isCircle ? curr_bus.route.size() : 2*curr_bus.route.size()-1;
+
+		set<string> unique (curr_bus.route.begin(), curr_bus.route.end());
+		resp.unique_stops_number = unique.size();
+
+		return resp;
+	} catch (...){
+		resp.exist = false;
+		return resp;
+	}
+};
+
+Stop_Response BusManager::Print_Stop(const Json::Node& node) const{
+	Stop_Response resp;
+	try{
+		const auto& map = node.AsMap();
+		string name = map.at("name").AsString();
+		resp.name = name;
+		resp.id = map.at("id").AsInt();
+
+		resp.buses = stops.at(name).buses;
+
+		return resp;
+	} catch (...){
+		resp.exist = false;
+		return resp;
+	}
+};
+
+void BusManager::Update(){
+	for(auto& curr_bus : buses){
+		for(auto& stop: curr_bus.second.route){	// для каждой остановки автобуса
+			stops.at(stop).buses.insert(curr_bus.second.GetNumber());	// записать остановке, что на ней есть этот автобус
+		}
+	}
+
+	for(auto& stop : stops){
+		for(auto& stop2 : stop.second.real_distance){
+			auto it = stops.at(stop2.first).real_distance.find(stop.first);
+			if(it == stops.at(stop2.first).real_distance.end())
+				stops.at(stop2.first).real_distance[stop.first] = stop.second.real_distance[stop2.first];
+		}
+	}
+
+}

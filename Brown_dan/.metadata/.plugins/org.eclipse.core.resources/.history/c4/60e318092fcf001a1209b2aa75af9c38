@@ -1,0 +1,60 @@
+#include "Geo.h"
+//#include "test_runner.h"
+#include "BusManager.h"
+#include "Bus_and_Stop.h"
+#include "json.h"
+
+using namespace std;
+
+void Read_DataBase(BusManager& bm, Json::Document& doc){
+
+	const auto& queries_array = doc.GetRoot().AsMap().at("base_requests").AsArray();
+
+	for(auto& q: queries_array){
+		if(q.AsMap().at("type").AsString() == "Stop"){
+			bm.ReadStop(q);
+		} else if (q.AsMap().at("type").AsString() == "Bus"){
+			bm.ReadBus(q);
+		}
+	}
+	bm.Update();
+}
+
+void Answer_DataBase(BusManager& bm, Json::Document& doc, ostream& os = cout){
+	const auto& queries_array = doc.GetRoot().AsMap().at("stat_requests").AsArray();
+	os << "[\n";
+	int coma_count = queries_array.size()-1;
+	for(const auto& q: queries_array){
+		if(q.AsMap().at("type").AsString() == "Stop"){
+			os << bm.Print_Stop(q);
+		} else if (q.AsMap().at("type").AsString() == "Bus"){
+			os << bm.Print_Bus(q);
+		}
+		if(coma_count>0) os << ",\n";
+		else os <<"\n";
+		coma_count--;
+	}
+	os << "]";
+
+	/*
+	int Q;
+	is >> Q;
+	for(int i=0; i<Q; ++i){
+		string type;
+		is >> type;
+		if(type == "Bus"){
+			os << bm.Print_Bus(is) << endl;
+		} else if(type == "Stop"){
+			os << bm.Print_Stop(is) << endl;
+		}
+	}*/
+}
+
+int main() {
+	//freopen("C:/Coursera/projects_eclipse/Brown_dan/Final_Project_D/in.txt", "r", stdin);
+	BusManager bm;
+	Json::Document doc = Json::Load(cin);
+	Read_DataBase(bm, doc);
+	Answer_DataBase(bm, doc, cout);
+	return 0;
+}

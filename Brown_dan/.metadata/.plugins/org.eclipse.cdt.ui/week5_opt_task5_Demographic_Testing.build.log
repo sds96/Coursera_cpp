@@ -1,0 +1,127 @@
+18:54:18 **** Incremental Build of configuration Debug for project week5_opt_task5_Demographic_Testing ****
+Info: Internal Builder is used for build
+g++ -std=c++1z -O0 -g3 -Wall -c -fmessage-length=0 -o Demographic_testing.o "..\\Demographic_testing.cpp" 
+..\Demographic_testing.cpp: In function 'void Test1()':
+..\Demographic_testing.cpp:138:2: error: 'vector' was not declared in this scope
+  vector<Person> empt;
+  ^~~~~~
+..\Demographic_testing.cpp:138:9: error: 'Person' was not declared in this scope
+  vector<Person> empt;
+         ^~~~~~
+..\Demographic_testing.cpp:138:17: error: 'empt' was not declared in this scope
+  vector<Person> empt;
+                 ^~~~
+..\Demographic_testing.cpp:139:15: error: 'ComputeStats' was not declared in this scope
+  ASSERT_EQUAL(ComputeStats(empt).total, 0);
+               ^~~~~~~~~~~~
+..\Demographic_testing.cpp:139:2: error: 'ASSERT_EQUAL' was not declared in this scope
+  ASSERT_EQUAL(ComputeStats(empt).total, 0);
+  ^~~~~~~~~~~~
+..\Demographic_testing.cpp: In function 'void Test2()':
+..\Demographic_testing.cpp:143:2: error: 'vector' was not declared in this scope
+  vector<Person> single;
+  ^~~~~~
+..\Demographic_testing.cpp:143:9: error: 'Person' was not declared in this scope
+  vector<Person> single;
+         ^~~~~~
+..\Demographic_testing.cpp:143:17: error: 'single' was not declared in this scope
+  vector<Person> single;
+                 ^~~~~~
+..\Demographic_testing.cpp:143:17: note: suggested alternative: 'signed'
+  vector<Person> single;
+                 ^~~~~~
+                 signed
+..\Demographic_testing.cpp:144:23: error: 'Gender' has not been declared
+  single.push_back({10,Gender::FEMALE, false});
+                       ^~~~~~
+..\Demographic_testing.cpp:145:15: error: 'ComputeStats' was not declared in this scope
+  ASSERT_EQUAL(ComputeStats(single).total, 10);
+               ^~~~~~~~~~~~
+..\Demographic_testing.cpp:145:2: error: 'ASSERT_EQUAL' was not declared in this scope
+  ASSERT_EQUAL(ComputeStats(single).total, 10);
+  ^~~~~~~~~~~~
+..\Demographic_testing.cpp: In function 'void Test3()':
+..\Demographic_testing.cpp:149:2: error: 'vector' was not declared in this scope
+  vector<Person> single;
+  ^~~~~~
+..\Demographic_testing.cpp:149:9: error: 'Person' was not declared in this scope
+  vector<Person> single;
+         ^~~~~~
+..\Demographic_testing.cpp:149:17: error: 'single' was not declared in this scope
+  vector<Person> single;
+                 ^~~~~~
+..\Demographic_testing.cpp:149:17: note: suggested alternative: 'signed'
+  vector<Person> single;
+                 ^~~~~~
+                 signed
+..\Demographic_testing.cpp:150:23: error: 'Gender' has not been declared
+  single.push_back({10,Gender::FEMALE, false});
+                       ^~~~~~
+..\Demographic_testing.cpp:151:23: error: 'Gender' has not been declared
+  single.push_back({11,Gender::FEMALE, true});
+                       ^~~~~~
+..\Demographic_testing.cpp:152:23: error: 'Gender' has not been declared
+  single.push_back({20,Gender::MALE, false});
+                       ^~~~~~
+..\Demographic_testing.cpp:153:23: error: 'Gender' has not been declared
+  single.push_back({21,Gender::MALE, true});
+                       ^~~~~~
+..\Demographic_testing.cpp:154:15: error: 'ComputeStats' was not declared in this scope
+  ASSERT_EQUAL(ComputeStats(single).employed_females, 11);
+               ^~~~~~~~~~~~
+..\Demographic_testing.cpp:154:2: error: 'ASSERT_EQUAL' was not declared in this scope
+  ASSERT_EQUAL(ComputeStats(single).employed_females, 11);
+  ^~~~~~~~~~~~
+..\Demographic_testing.cpp: In function 'void TestPrintStatsChangeOrder()':
+..\Demographic_testing.cpp:161:3: error: 'ostringstream' was not declared in this scope
+   ostringstream stream;
+   ^~~~~~~~~~~~~
+..\Demographic_testing.cpp:162:9: error: 'AgeStats' does not name a type
+   const AgeStats stats{
+         ^~~~~~~~
+..\Demographic_testing.cpp:171:14: error: 'stats' was not declared in this scope
+   PrintStats(stats, stream);
+              ^~~~~
+..\Demographic_testing.cpp:171:14: note: suggested alternative: 'static'
+   PrintStats(stats, stream);
+              ^~~~~
+              static
+..\Demographic_testing.cpp:171:21: error: 'stream' was not declared in this scope
+   PrintStats(stats, stream);
+                     ^~~~~~
+..\Demographic_testing.cpp:171:21: note: suggested alternative: 'struct'
+   PrintStats(stats, stream);
+                     ^~~~~~
+                     struct
+..\Demographic_testing.cpp:171:3: error: 'PrintStats' was not declared in this scope
+   PrintStats(stats, stream);
+   ^~~~~~~~~~
+..\Demographic_testing.cpp:172:3: error: 'ASSERT_EQUAL' was not declared in this scope
+   ASSERT_EQUAL(
+   ^~~~~~~~~~~~
+..\Demographic_testing.cpp: In function 'void TestComputeStatsConfuseBounds()':
+..\Demographic_testing.cpp:185:9: error: 'vector' does not name a type
+   const vector<Person> persons = {
+         ^~~~~~
+..\Demographic_testing.cpp:188:29: error: 'persons' was not declared in this scope
+   ASSERT_EQUAL(ComputeStats(persons).employed_males, 32);
+                             ^~~~~~~
+..\Demographic_testing.cpp:188:16: error: 'ComputeStats' was not declared in this scope
+   ASSERT_EQUAL(ComputeStats(persons).employed_males, 32);
+                ^~~~~~~~~~~~
+..\Demographic_testing.cpp:188:3: error: 'ASSERT_EQUAL' was not declared in this scope
+   ASSERT_EQUAL(ComputeStats(persons).employed_males, 32);
+   ^~~~~~~~~~~~
+..\Demographic_testing.cpp: In function 'void Test_all()':
+..\Demographic_testing.cpp:192:2: error: 'TestRunner' was not declared in this scope
+  TestRunner tr;
+  ^~~~~~~~~~
+..\Demographic_testing.cpp:193:11: error: 'tr' was not declared in this scope
+  RUN_TEST(tr, Test1);
+           ^~
+..\Demographic_testing.cpp:193:2: error: 'RUN_TEST' was not declared in this scope
+  RUN_TEST(tr, Test1);
+  ^~~~~~~~
+
+18:54:18 Build Failed. 33 errors, 0 warnings. (took 110ms)
+
